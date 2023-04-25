@@ -50,6 +50,20 @@ testFolder () {
   cd $FOLDER
 }
 
+iPull () {
+  docker pull registry.gitlab.com/nowjobs/backoffice/develop
+  docker pull registry.gitlab.com/nowjobs/desktop-app/develop
+  docker pull registry.gitlab.com/nowjobs/mobile-app/develop
+  docker pull registry.gitlab.com/nowjobs/geoserver/develop
+
+  FOLDER=$PWD;
+
+  cd $SERVER_PATH
+  docker-compose up -d --force-recreate backoffice mobile desktop
+
+  cd $FOLDER
+}
+
 export EDITOR='vim'
 
 source /Users/peterdelvaux/.docker/init-zsh.sh || true # Added by Docker Desktop
